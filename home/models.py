@@ -1,4 +1,5 @@
 from django.db import models
+from django_resized import ResizedImageField
 
 
 class Contact(models.Model):
@@ -9,7 +10,28 @@ class Contact(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-# Create your models here.
+    class Meta:
+        verbose_name_plural = "Contacts"
+
+    def __str__(self):
+        return self.name
+
+
+class OurHeroes(models.Model):
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100)
+    image = ResizedImageField(size=[700, 544], upload_to='our_heroes/', null=True, blank=True,
+                              force_format='WEBP', quality=75)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Our Heroes"
+
+
 class AdmissionForm(models.Model):
     addmission_no = models.AutoField(primary_key=True)
     applicant_name = models.CharField(max_length=100)
@@ -34,3 +56,9 @@ class AdmissionForm(models.Model):
     applicant_doc_2 = models.FileField(upload_to='applicant_file_2/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Admission Forms"
+
+    def __str__(self):
+        return self.applicant_name
