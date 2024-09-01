@@ -20,8 +20,8 @@ class Contact(models.Model):
 class OurHeroes(models.Model):
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
-    image = ResizedImageField(size=[700, 544], upload_to='our_heroes/', null=True, blank=True,
-                              force_format='WEBP', quality=75)
+    image = ResizedImageField(size=[1920, 1080], upload_to='our_heroes/', null=True, blank=True,
+                              force_format='WEBP', quality=90)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
